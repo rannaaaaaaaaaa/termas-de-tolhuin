@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Termas de Tolhuin – Termas del Río Valdez</title>
+<meta name="description" content="Aguas termales en el bosque fueguino, a orillas del Río Valdez. Ubicación, cómo llegar, actividades y recomendaciones.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bosque:#24402f;
+  --agua:#2f7a82;
+  --musgo:#e9f0ec;
+  --piedra:#5c6661;
+  --lupino:#b83373;
+  --texto:#1f2a25;
+  --blanco:#fbfdfc;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:'Figtree',system-ui,sans-serif;color:var(--texto);background:var(--blanco);line-height:1.65;font-size:1.05rem}
+h1,h2{font-family:'Young Serif',Georgia,serif;font-weight:400;line-height:1.15;color:var(--bosque)}
+img{max-width:100%;display:block}
+a{color:var(--agua)}
+:focus-visible{outline:3px solid var(--lupino);outline-offset:3px}
+.wrap{width:min(1080px,100% - 2.5rem);margin-inline:auto}
+
+/* portada */
+.portada{background:var(--bosque);color:var(--blanco)}
+.portada .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;padding-block:3.5rem}
+.portada h1{color:var(--blanco);font-size:clamp(2.4rem,6vw,4rem)}
+.portada p{margin-top:1.2rem;max-width:34ch;font-size:1.15rem;color:#d5e3da}
+.portada .btn{display:inline-block;margin-top:1.8rem;background:var(--blanco);color:var(--bosque);padding:.8rem 1.5rem;border-radius:999px;text-decoration:none;font-weight:600}
+.portada .btn:hover{background:var(--musgo)}
+.portada figure{border-radius:1.2rem;overflow:hidden;aspect-ratio:4/5}
+.portada figure img{width:100%;height:100%;object-fit:cover}
+
+section{padding-block:3.5rem}
+h2{font-size:clamp(1.8rem,4vw,2.4rem);margin-bottom:1rem}
+.intro{max-width:62ch}
+
+/* datos */
+.datos{background:var(--musgo)}
+.datos .wrap{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem 4rem}
+.datos h2{font-size:1.5rem}
+.datos p+p{margin-top:.8rem}
+
+/* mapa */
+.mapa-box{margin-top:1.8rem;border-radius:1rem;overflow:hidden;border:1px solid #cddad3;background:#dfe9e4}
+.mapa-box iframe{display:block;width:100%;height:clamp(300px,50vw,440px);border:0}
+.mapa-link{display:inline-block;margin-top:.9rem;font-weight:600}
+
+/* actividades */
+.actividades ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem 3rem;max-width:760px}
+.actividades li{padding-left:1.6rem;position:relative}
+.actividades li::before{content:"";position:absolute;left:0;top:.7em;width:.7rem;height:.7rem;border-radius:50%;background:var(--agua)}
+
+/* galería */
+.galeria .grilla{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}
+.galeria img{width:100%;height:100%;object-fit:cover;border-radius:.8rem;aspect-ratio:4/3}
+.galeria .ancha{grid-column:span 2}
+.galeria .ancha img{aspect-ratio:16/9}
+
+/* recomendaciones */
+.recom{background:var(--bosque);color:var(--blanco)}
+.recom h2{color:var(--blanco)}
+.recom ul{list-style:none;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:1rem 3rem;max-width:860px}
+.recom li{padding-left:2rem;position:relative}
+.recom li::before{content:"✓";position:absolute;left:0;color:#f2a6c8;font-weight:700}
+
+footer{padding-block:2rem;text-align:center;color:var(--piedra);font-size:.95rem}
+
+@media (max-width:760px){
+  body{font-size:1rem}
+  .portada .wrap{grid-template-columns:1fr;gap:2rem;padding-block:2.2rem}
+  .portada figure{aspect-ratio:4/3}
+  .datos .wrap,.actividades ul,.recom ul{grid-template-columns:1fr}
+  .datos .wrap{gap:2rem}
+  section{padding-block:2.5rem}
+  .galeria .grilla{grid-template-columns:1fr 1fr}
+  .galeria .ancha{grid-column:span 2}
+}
+
+/* animación de inicio (solo transform y opacity, sin filtros) */
+.splash{position:fixed;top:0;right:0;bottom:0;left:0;z-index:1000;display:grid;place-items:center;overflow:hidden;cursor:pointer;
+  background:radial-gradient(circle at 50% 55%,#35604a 0%,var(--bosque) 60%);
+  transition:opacity .8s ease}
+.splash.salir{opacity:0;pointer-events:none}
+.onda{position:absolute;left:50%;top:50%;width:20vmin;height:20vmin;margin:-10vmin 0 0 -10vmin;border-radius:50%;border:2px solid rgba(190,230,230,.3);opacity:0;animation:onda 4s ease-out infinite}
+.onda:nth-child(2){animation-delay:1.3s}
+.onda:nth-child(3){animation-delay:2.6s}
+@keyframes onda{0%{transform:scale(.2);opacity:0}15%{opacity:1}100%{transform:scale(6);opacity:0}}
+.splash-centro{position:relative;text-align:center;padding:0 1.2rem}
+.splash-titulo{font-family:'Young Serif',Georgia,serif;color:var(--blanco);font-size:clamp(2.6rem,10vw,5.8rem);line-height:1.15}
+.pal{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .08em}
+.pal span{display:inline-block;transform:translateY(110%);animation:sube .9s cubic-bezier(.2,.8,.2,1) forwards}
+.pal:nth-child(2) span{animation-delay:.35s}
+.pal:nth-child(3) span{animation-delay:.7s;color:#f2a6c8}
+@keyframes sube{to{transform:translateY(0)}}
+.splash-sub{margin-top:1rem;color:#b9d2c5;letter-spacing:.04em;opacity:0;animation:aparece 1s ease 1.6s forwards}
+@keyframes aparece{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.splash{display:none}}
+</style>
+<noscript><style>.splash{display:none}</style></noscript>
+</head>
+<body>
+
+<div class="splash" id="splash" aria-hidden="true">
+  <span class="onda"></span><span class="onda"></span><span class="onda"></span>
+  <div class="splash-centro">
+    <div class="splash-titulo"><span class="pal"><span>Termas</span></span> <span class="pal"><span>Río</span></span> <span class="pal"><span>Valdez</span></span></div>
+    <p class="splash-sub">Tolhuin, Tierra del Fuego</p>
+  </div>
+</div>
+
+<div class="pagina">
+<header class="portada">
+  <div class="wrap">
+    <div>
+      <h1>Termas de Tolhuin</h1>
+      <p>Aguas termales del Río Valdez, en medio del bosque fueguino.</p>
+      <a class="btn" href="#como-llegar">Cómo llegar</a>
+    </div>
+    <figure><img src="img/termas-5.jpg" alt="Piletas termales rodeadas de bosque y flores de lupino"></figure>
+  </div>
+</header>
+
+<main>
+  <section class="datos">
+    <div class="wrap">
+      <div>
+        <h2>El lugar</h2>
+        <p>Las Termas de Tolhuin, también conocidas como Termas del Río Valdez, están en la provincia de Tierra del Fuego, Argentina.</p>
+      </div>
+      <div>
+        <h2>Ubicación</h2>
+        <p>Se encuentran a unos 30 km de la ciudad de Tolhuin, a orillas del Río Valdez y rodeadas de bosque fueguino.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-llegar">
+    <div class="wrap">
+      <h2>Cómo llegar</h2>
+      <p class="intro">Desde Tolhuin se toma la Ruta Nacional N.º 3 y luego el acceso hacia las Termas del Río Valdez. Podés ir en vehículo particular o con un servicio de traslado habilitado.</p>
+      <div class="mapa-box">
+        <iframe title="Mapa de las Termas del Río Valdez" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Termas+del+R%C3%ADo+Valdez,+Tolhuin,+Tierra+del+Fuego,+Argentina&output=embed"></iframe>
+      </div>
+      <a class="mapa-link" href="https://www.google.com/maps/search/?api=1&query=Termas+del+R%C3%ADo+Valdez+Tolhuin+Tierra+del+Fuego" target="_blank" rel="noopener">Abrir en Google Maps</a>
+    </div>
+  </section>
+
+  <section class="actividades" style="background:var(--musgo)">
+    <div class="wrap">
+      <h2>Qué hacer</h2>
+      <ul>
+        <li>Disfrutar de las aguas termales</li>
+        <li>Relajarse y descansar</li>
+        <li>Contemplar el paisaje natural</li>
+        <li>Recorrer y conocer el entorno</li>
+        <li>Observar la flora y fauna de la zona</li>
+        <li>Sacar fotografías del paisaje</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="galeria">
+    <div class="wrap">
+      <h2>Así se ve</h2>
+      <div class="grilla">
+        <div class="ancha"><img src="img/termas-1.jpg" alt="Visitantes bañándose en las piletas termales" loading="lazy"></div>
+        <div><img src="img/termas-3.jpg" alt="Piletas con lupinos en primer plano" loading="lazy"></div>
+        <div><img src="img/termas-4.jpg" alt="Vista de las piletas en otoño, con el bosque de fondo" loading="lazy"></div>
+        <div class="ancha"><img src="img/termas-2.jpg" alt="Grupo de visitantes disfrutando de las termas en otoño" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="recom">
+    <div class="wrap">
+      <h2>Antes de ir</h2>
+      <ul>
+        <li>Llevar traje de baño, toalla y ropa de abrigo</li>
+        <li>Reservar el turno antes de asistir</li>
+        <li>Respetar las indicaciones del personal</li>
+        <li>Cuidar el ambiente y no dejar residuos</li>
+        <li>Mantenerse hidratado y hacer descansos durante el baño</li>
+        <li>Consultar antes los horarios y condiciones de acceso</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Termas de Tolhuin · Tierra del Fuego, Argentina</div>
+</footer>
+</div>
+
+<script>
+(function(){
+  var i=document.getElementById('splash');
+  if(!i)return;
+  var hecho=false;
+  try{history.scrollRestoration='manual';}catch(e){}
+  function salir(){
+    if(hecho)return; hecho=true;
+    window.scrollTo(0,0);
+    i.classList.add('salir');
+    setTimeout(function(){i.style.display='none';},900);
+  }
+  i.addEventListener('click',salir);
+  setTimeout(salir,3800);
+})();
+</script>
+</body>
+</html>
